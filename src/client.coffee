@@ -97,6 +97,7 @@ class SlackClient
     options = { as_user: true, link_names: 1, thread_ts: envelope.message?.thread_ts }
 
     if typeof message isnt 'string'
+      options.as_user = message.as_user || true ## allow impersonation
       @web.chat.postMessage(room, message.text, _.defaults(message, options))
     else
       @web.chat.postMessage(room, message, options)
